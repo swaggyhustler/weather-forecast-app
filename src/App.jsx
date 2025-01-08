@@ -29,24 +29,25 @@ const App = () => {
       });
   }
       const fetchData = async () => {
-          const result = await axios.get(`https://api.weatherapi.com/v1/forecast.json?key=22e8fa32e0d54bc09bc144901250501&q=${coordinates.latitude},${coordinates.longitude}&days=4`);
+          console.log("called api");
+          const result = await axios.get(`https://api.weatherapi.com/v1/forecast.json?key=22e8fa32e0d54bc09bc144901250501&q=${coordinates?.latitude},${coordinates?.longitude}&days=4`);
           setData(result.data);
           setLoading(false);
       }
       getCurrentCoords().then((res)=>setCoordinates(res))
       .then(fetchData());
-  }, [coordinates]);
+  }, [coordinates?.latitude, coordinates?.longitude]);
   
   return (
     <>
     {!loading?<div className="bg-slate-950 text-white">
-      <div className="w-[95vw] mx-auto h-screen flex justify-between">
-        <div id="left" className="w-[60%]">
-          <SearchBar setData={setData} />
+      <div className="w-[95vw] mx-auto h-full md:h-screen flex flex-col md:flex-row justify-between items-center md:items-start">
+        <div id="left" className="w-[90%] md:w-[60%]">
+          <SearchBar setData={setData} setLoading={setLoading} />
           <Current data={data} />
           <TodayForecast forecast={data?.forecast?.forecastday[0].hour}/>
         </div>
-        <div id="right" className="bg-black w-[38%]">
+        <div id="right" className="bg-black w-[90%] md:w-[38%]">
           <DaysForecast data={data?.forecast?.forecastday.slice(1)} />
         </div>
       </div>

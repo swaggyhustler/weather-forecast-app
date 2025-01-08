@@ -1,7 +1,7 @@
 const HourlyForecast = ({data, length, index}) => {
-    let style = "flex flex-col justify-around items-center h-[80%] w-[20%] border-r";
+    let style = "flex flex-col justify-around items-center h-[80%] min-w-[40%] md:min-w-[20%] pr-2 md:pr-0 mx-2 md:mx-0 border-r";
     if(index===length-1){
-        style = "flex flex-col justify-around items-center h-[80%] w-[20%]";
+        style = "flex flex-col justify-around items-center h-[80%] min-w-[40%] md:min-w-[20%] mx-2 md:mx-0";
     }
     return (
         <div className={style}>

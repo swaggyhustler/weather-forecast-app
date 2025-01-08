@@ -1,13 +1,15 @@
 import { useState } from "react";
 import axios from 'axios';
 
-const SearchBar = ({setData}) => {
+const SearchBar = ({setData, setLoading}) => {
     const [city, setCity] = useState("");
 
     const handleSubmit = async (e) => {
+        setLoading(true);
         e.preventDefault();
         const result = await axios.get(`https://api.weatherapi.com/v1/forecast.json?key=22e8fa32e0d54bc09bc144901250501&q=${city.toLowerCase()}&days=10`);
         setData(result.data);
+        setLoading(false);
     }
     
     return (
